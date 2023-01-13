@@ -2,11 +2,10 @@ const ProfileModel = require("../models/profile-model");
 const jwt = require("jsonwebtoken");
 
 exports.UserLogin=(req,res)=>{
-    let reqBody = req.body;
     let UserName = req.body['UserName'];
     let Password = req.body['Password'];
 
-    ProfileModel.find({UserName: UserName, Password:Password},(err,data)=>{
+    ProfileModel.find({UserName: UserName, Password:Password},{Password: 0},(err,data)=>{
         if(err){
             res.status(400).json({status:"fail", data:err});
         }
